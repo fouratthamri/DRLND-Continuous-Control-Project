@@ -69,8 +69,7 @@ class Critic(nn.Module):
 
     def forward(self, state, action):
         """Critic net forward pass. Takes a state as a torch tensor"""
-        xs = F.relu(self.linear1(state))
-        x = torch.cat((xs, action), dim=1)
+        x = F.relu(self.linear1(state))
         x = F.relu(self.linear2(x))
         x = self.linear3(x)
 

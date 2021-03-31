@@ -1,8 +1,10 @@
-
+import torch
 import numpy as np
 import gym
 from collections import deque, namedtuple
 import random
+
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 class OUNoise(object):
     def __init__(self, action_space, seed, mu=0.0, theta=0.15, max_sigma=0.3, min_sigma=0.3, decay_period=100000):
