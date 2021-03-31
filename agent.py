@@ -15,7 +15,7 @@ LR_ACTOR = 1e-3         # Actor net learning rate
 LR_CRITIC = 1e-3        # Critic net learning rate 
 WEIGHT_DECAY = 0        # L2 weight decay
 TAU = 1e-3              # Soft update parameter 
-BATCH_SIZE = 128        # minibatch size
+BATCH_SIZE = 512        # minibatch size
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
