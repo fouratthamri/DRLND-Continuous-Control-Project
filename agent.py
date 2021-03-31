@@ -9,13 +9,13 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 
-BUFFER_SIZE = int(1e6)  # The replaybuffer memory size
+BUFFER_SIZE = int(1e5)  # The replaybuffer memory size
 GAMMA = 0.99            # The Bellman discount factor
-LR_ACTOR = 1e-4         # Actor net learning rate 
-LR_CRITIC = 3e-4        # Critic net learning rate 
+LR_ACTOR = 1e-3         # Actor net learning rate 
+LR_CRITIC = 1e-3        # Critic net learning rate 
 WEIGHT_DECAY = 0        # L2 weight decay
 TAU = 1e-3              # Soft update parameter 
-BATCH_SIZE = 512        # minibatch size
+BATCH_SIZE = 128        # minibatch size
 
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
