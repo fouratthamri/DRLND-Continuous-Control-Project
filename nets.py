@@ -12,7 +12,7 @@ def hidden_init(layer):
 class Actor(nn.Module):
     """Actor (Policy) Model."""
 
-    def __init__(self, state_size, action_size, seed, hidden_size=256):
+    def __init__(self, state_size, action_size, seed, hidden_size=128):
         """Initialize parameters and build model.
         Params
         ======
@@ -46,7 +46,7 @@ class Actor(nn.Module):
 class Critic(nn.Module):
     """Critic (Value) Model."""
 
-    def __init__(self, state_size, action_size, seed, hidden_size=256):
+    def __init__(self, state_size, action_size, seed, hidden_size=128):
         """Initialize parameters and build model.
         Args
         ======
@@ -58,7 +58,7 @@ class Critic(nn.Module):
         super(Critic, self).__init__()
         self.seed = torch.manual_seed(seed)
         self.linear1 = nn.Linear(state_size, hidden_size)
-        self.linear2 = nn.Linear(hidden_size, hidden_size)
+        self.linear2 = nn.Linear(hidden_size+action_size, hidden_size)
         self.linear3 = nn.Linear(hidden_size, 1)
         self.reset_parameters()
 
@@ -69,7 +69,8 @@ class Critic(nn.Module):
 
     def forward(self, state, action):
         """Critic net forward pass. Takes a state as a torch tensor"""
-        x = F.relu(self.linear1(state))
+        xs = F.relu(self.linear1(state))
+        x = torch.cat((xs, action), dim=1)
         x = F.relu(self.linear2(x))
         x = self.linear3(x)
 
